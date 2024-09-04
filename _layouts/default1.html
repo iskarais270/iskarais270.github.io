@@ -39,8 +39,10 @@
 	
 	
 <style>
-  body {
-    font-family: Arial, sans-serif;
+  a {
+color: #000;	  
+  }
+body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
@@ -153,12 +155,15 @@
     0% { opacity: 0.8; }
     100% { opacity: 1; }
   }
-  h2, h3, h4 {
+ h2, h3, h4 {
     color: #006400;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 0px solid #ccc;
     padding-bottom: 10px;
     margin-bottom: 20px;
   }
+	h1 {
+		color: #fff;
+	}
   ul {
     list-style-type: disc;
     padding-left: 20px;
@@ -192,21 +197,28 @@
 
 <body>
 
+
+
 	
 	
 <div class="header">
-  <div class="container"><b>
+  <div class="container">
+	  
+	  <div style="position:absolute;top:14px;left:10px;"><a href="/" ><img alt="" border="0" height="32px" src="/favicon.ico" width="32px" /></a></div><h1 style="position:absolute;top:16px;left:48px;width:15em;font-size:1.5em;padding:0;color:#fff;"><a href="/">{{ site.name }}</a></h1>
+	  
+	<!--  <b>
 <a href="/" style="font-size: 24px; color:#fff;" >
     {{ site.name }}
-    </a></b>
+    </a></b>-->
+	  
 </div>
 </div>
 
 <nav class="sidebar hide" id="sidebar">
 <div style="padding:10px" >
-    <p class="lead">
+    <p class="lead"><span style="color:#000;">
         {{ site.description }}
-    </p> 
+    </span></p> 
 </div>
 
   <ul>
@@ -224,8 +236,9 @@
     <li><a href="/toxic">Toxic Ornamental Plants</a></li>
     
     <li><a href="/unique">Rare or Unique Ornamental Plants</a></li>
-    <li><a href="/edible">Edible Ornamental Plants</a></li>
+	  <li><a href="/edible">Edible Ornamental Plants</a></li>
 	  <li><a href="/fragrant">Fragrant Ornamental Plants</a></li>
+    
   </ul>
   <div style="padding: 10px;">{% include search-lunr.html %}</div>
 </nav>
@@ -598,7 +611,7 @@
   </script>
 
 
-	<!-- tabunder + url rotator -->
+<!-- tabunder + url rotator -->
 <script>
     // URL Feed Blogger
     const feedUrl = 'https://www.fazri.my.id/feeds/posts/default/?start-index=1&max-results=6666&alt=json-in-script&callback=rak_info_Load';
@@ -662,15 +675,6 @@
 </script><!-- tabunder + url rotator -->
 
 
-<script type="text/javascript">
-   var uid = '342117';
-   var wid = '699120';
-   var pop_tag = document.createElement('script');pop_tag.src='//cdn.popcash.net/show.js';document.body.appendChild(pop_tag);
-   pop_tag.onerror = function() {pop_tag = document.createElement('script');pop_tag.src='//cdn2.popcash.net/show.js';document.body.appendChild(pop_tag)};
-</script>
-
-
-
+	
 </body>
 </html>
-
