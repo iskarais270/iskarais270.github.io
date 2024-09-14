@@ -972,3 +972,16 @@ https://search.google.com/structured-data/testing-tool/u/0/
 }
 </script>
 {% endif %}
+
+{% for post in site.posts %}
+    {% if post.categories contains page.category %}
+      <li id="post-{{ post.id }}">
+        <a href="{{ post.url }}">
+          {% if post.image %}
+            <img src="{{ post.image }}" alt="{{ post.title }}" id="post-image-{{ post.id }}" class="post-image">
+          {% endif %}
+          <br />{{ post.title }}
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
