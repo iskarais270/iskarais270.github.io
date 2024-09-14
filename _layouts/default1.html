@@ -39,6 +39,41 @@
 	
 	
 <style>
+.related-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+  grid-template-rows: repeat(3, auto); /* 3 baris */
+  gap: 20px; /* Jarak antara item */
+  width: 100%; /* Pastikan grid menggunakan lebar penuh */
+  max-width: 1200px; /* Opsional: batasi lebar grid jika diperlukan */
+  margin: 0 auto; /* Opsional: pusatkan grid jika lebar dibatasi */
+}
+
+.related-post {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.related-post img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.related-post a {
+  text-decoration: none;
+  color: #333;
+}
+
+.related-post span {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+	
   h1 a {
             color: #ffffff;
         }
@@ -354,6 +389,21 @@ body {
 		    
 		    
       {{ content }}
+
+
+
+
+
+
+    {% if page.show_related_posts %}
+      <div class="related-posts">
+        {% include related_posts.html %}
+      </div>
+    {% endif %}
+
+	  
+
+		    
       </div>     </div>
         </div>
 
