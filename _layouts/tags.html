@@ -1,7 +1,5 @@
 ---
-title: "Tags"
 layout: default1
-permalink: "/tags.html"
 ---
 
 
@@ -12,28 +10,6 @@ permalink: "/tags.html"
 
 
 
-<h2>   
-Miniature or Bonsai Ornamental Plants
-</h2>
-
-
-<div class="col-12 mb-4">
-               <div class="row">
-          {% for post in site.categories.bonsai limit: 3 %}
-          <div class="col-md-4 col-sm-6 animate__animated animate__fadeIn">
-            <div class="card">
-           <a href="{{ post.url }}">   <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}">
-           </a>
-              <div class="card-body">
-                <h5 class="card-title" style="max-width:100%;">{{ post.title }}</h5>
-                <a href="{{ post.url }}" class="btn btn-primary">Read More
-                        </a>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
 
 
 
@@ -43,12 +19,12 @@ Miniature or Bonsai Ornamental Plants
 
 <link rel="stylesheet" href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css" type="text/css" />
 <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script><center>
-<video id='4041' controls autoplay loop muted style="max-width:100%; height:auto;" >
+<video id='f4041' controls autoplay loop muted style="max-width:100%; height:auto;" >
    <source src='https://video.twimg.com/ext_tw_video/1584254045212008448/pu/vid/360x360/cJxNNcSiyE_G7kUW.mp4' title='{{ page.title }}' type='video/mp4' />
 </video></center>
 <script type="application/javascript">
     var testVideo = fluidPlayer(
-        "4041",
+        "f4041",
 {
 	"layoutControls": {
 		"controlBar": {
@@ -148,50 +124,95 @@ Miniature or Bonsai Ornamental Plants
     );
 </script>
 
-<h2>Aquatic Ornamental Plants</h2>
-<div class="col-12 mb-4">
-               <div class="row">
-          {% for post in site.categories.aquatic limit: 3 %}
-          <div class="col-md-4 col-sm-6 animate__animated animate__fadeIn">
-            <div class="card">
-           <a href="{{ post.url }}">   <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}">
-           </a>
-              <div class="card-body">
-                <h5 class="card-title" style="max-width:100%;">{{ post.title }}</h5>
-                <a href="{{ post.url }}" class="btn btn-primary">Read More
-                        </a>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-
-<h2>
-Toxic Ornamental Plants  
-</h2>
-<div class="col-12 mb-4">
-               <div class="row">
-          {% for post in site.categories.toxic limit: 3 %}
-          <div class="col-md-4 col-sm-6 animate__animated animate__fadeIn">
-            <div class="card">
-           <a href="{{ post.url }}">   <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}">
-           </a>
-              <div class="card-body">
-                <h5 class="card-title" style="max-width:100%;">{{ post.title }}</h5>
-                <a href="{{ post.url }}" class="btn btn-primary">Read More
-                        </a>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
+<ul id="category-posts">
+	<h2>{{ page.title }}</h2>
+  {% for post in site.posts %}
+    {% if post.tags contains page.tag %}
+      <li id="post-{{ post.id }}">
+        <a href="{{ post.url }}">
+          {% if post.image %}
+            <img src="{{ post.image }}" alt="{{ post.title }}" id="post-image-{{ post.id }}" class="post-image">
+          {% endif %}
+          <br />{{ post.title }}
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
 
 
-<div class="jontor" loading="lazy" style="width:100%; height:5px; overflow:auto;">
-<br /><br /><br /><br />
-<script src="https://rawgit.com/rezamuhamad/rakinfo/master/sitemap.js"></script>
-<script src="https://www.ioma.my.id/feeds/posts/default/?start-index=1&max-results=6666&amp;alt=json-in-script&amp;callback=rak_info_Load"></script></div>
 
-  
+
+
+<div id="labelContainer">
+  <button id="toggleButton" onclick="toggleLabels()" style="background: transparent; border: 1px solid #ccc00000; padding: 10px; cursor: pointer;">
+    .
+  </button>
+  <div id="labelList" style="display: none;"></div> <!-- Hidden by default -->
+</div>
+
+<script>
+  function rak_info_Load(data) {
+    const entries = data.feed.entry;
+    const labelSet = new Set();
+
+    // Loop through each post to collect labels
+    for (let i = 0; i < entries.length; i++) {
+      const entry = entries[i];
+
+      // Check if the post has categories (labels)
+      if (entry.category) {
+        entry.category.forEach(cat => {
+          labelSet.add(cat.term);  // Menambahkan label ke Set untuk menghindari duplikasi
+        });
+      }
+    }
+
+    // Convert Set to Array and sort labels alphabetically
+    const sortedLabels = Array.from(labelSet).sort();
+
+    // Group labels into paragraphs of 10
+    const labelList = document.getElementById("labelList");
+    labelList.innerHTML = ''; // Clear existing content
+
+    for (let i = 0; i < sortedLabels.length; i += 10) {
+      // Slice array into chunks of 10
+      const labelGroup = sortedLabels.slice(i, i + 10);
+      const paragraph = document.createElement("p");
+
+      // Join labels with commas and append them as a paragraph
+      paragraph.innerHTML = labelGroup.join(', ');
+      labelList.appendChild(paragraph);
+    }
+  }
+
+  // Function to toggle the visibility of the label list
+  function toggleLabels() {
+    const labelList = document.getElementById("labelList");
+    const toggleButton = document.getElementById("toggleButton");
+
+    if (labelList.style.display === "none") {
+      labelList.style.display = "block";
+      toggleButton.textContent = "Hide Labels";
+    } else {
+      labelList.style.display = "none";
+      toggleButton.textContent = "Show Labels";
+    }
+  }
+
+  // Load the Blogger feed without pagination
+  const script = document.createElement("script");
+  script.src = "https://xcelebgram.my.id/feeds/posts/default/?start-index=1&max-results=6500&alt=json-in-script&callback=rak_info_Load";
+  document.body.appendChild(script);
+</script>
+
+<!-- Optional CSS for further button styling -->
+<style>
+  #toggleButton {
+    transition: background-color 0.3s, color 0.3s;
+  }
+  #toggleButton:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Slight darkening on hover */
+    color: #333; /* Change text color on hover */
+  }
+</style>
