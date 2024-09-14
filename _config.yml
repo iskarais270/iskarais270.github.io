@@ -45,7 +45,7 @@ jekyll-archives:
     - categories
   layout: archive
   permalinks:
-    category: '/category/:name/'
+    category: '/categories/:name/'
     
 # Pagination 
 paginate: 7
@@ -54,6 +54,17 @@ paginate_path: /page:num/
 # Other
 markdown: kramdown
 
+categories:
+  - Flowering
+  - Foliage
+  - Hanging
+  - Bonsai
+  - Aquatic
+  - Toxic
+  - Unique
+  - Edible
+  - Fragrant
+  
 kramdown:
   input: GFM
   syntax_highlighter: rouge
