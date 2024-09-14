@@ -985,3 +985,10 @@ https://search.google.com/structured-data/testing-tool/u/0/
       </li>
     {% endif %}
   {% endfor %}
+
+
+    {% if page.show_related_posts %}
+      <div class="related-posts">
+        {% include related_posts.html %}
+      </div>
+    {% endif %}
