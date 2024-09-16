@@ -1,7 +1,7 @@
 # Site
-name: "ingganinggra"
-title: "ingganinggra"
-description: "There are no gardening mistakes, only experiments"
+name: "iskarais270"
+title: "iskarais270"
+description: "Creating Beautiful, Sustainable Gardens"
 logo: '/favicon.ico'
 favicon: '/favicon.ico'
 baseurl: /
@@ -48,7 +48,7 @@ jekyll-archives:
     category: '/categories/:name/'
     
 # Pagination 
-paginate: 7
+paginate: 8
 paginate_path: /page:num/
     
 # Other
